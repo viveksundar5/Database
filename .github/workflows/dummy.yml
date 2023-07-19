@@ -40,8 +40,8 @@ jobs:
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{squ_ef5b470f301e381f3c8567aff8f6d4c7f9fd67f2}}
-          SONAR_HOST_URL: ${{http://3.110.119.245:9000/}}
+          SONAR_TOKEN: ${{  squ_ef5b470f301e381f3c8567aff8f6d4c7f9fd67f2  }}
+          SONAR_HOST_URL: ${{  http://3.110.119.245:9000/  }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=test-maven-project
          
       #- name: Publish to GitHub Packages Apache Maven
