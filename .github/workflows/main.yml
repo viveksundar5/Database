@@ -8,7 +8,7 @@ jobs:
 
     trigger_database: 
       
-       uses: viveksundar5/callerworkflow/.github/workflows/main.yml@main
+       uses: viveksundar5/database/.github/workflows/dummy.yml@main
       
        secrets:
          Workflow2_PAT_TOKEN_GITHUB: ${{ secrets.Workflow2_PAT_TOKEN_GITHUB }}
