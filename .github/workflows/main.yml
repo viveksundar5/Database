@@ -3,9 +3,10 @@ name: database CI
 on:
  workflow_dispatch:
  
-env:
-  TOKEN: ${{ secrets.SONAR_TOKEN }}
-  URL: ${{ secrets.SONAR_HOST_URL }}
+   inputs: |
+    -D sonar.projectKey=test-maven-project \
+    -D sonar.host.url=$SONAR_HOST_URL \
+    -D sonar.login=admin -D sonar.password=admin123 
  
  
 jobs:
