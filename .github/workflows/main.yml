@@ -3,11 +3,6 @@ name: database CI
 on:
  workflow_dispatch:
  
-   inputs: |
-    -D sonar.projectKey=sql-server-test \
-    -D sonar.host.url=$SONAR_HOST_URL \
-    -D sonar.login=admin -D sonar.password=admin123 
- 
  
 jobs:
 
