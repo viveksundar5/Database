@@ -1,15 +1,11 @@
 name: database CI
 
 on:
- workflow_dispatch:
- 
- 
+  workflow_dispatch:
+  
 jobs:
-
-    trigger_database: 
-      
-       uses: viveksundar5/database_sample/.github/workflows/main.yml@main
-      
-       secrets:
-         Workflow2_PAT_TOKEN_GITHUB: ${{ secrets.Workflow2_PAT_TOKEN_GITHUB }}
+  trigger_database:
+    uses: viveksundar5/database_sample/.github/workflows/main.yml@main
+    secrets:
+      Workflow2_PAT_TOKEN_GITHUB: ${{ secrets.Workflow2_PAT_TOKEN_GITHUB }}
       
