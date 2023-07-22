@@ -8,6 +8,6 @@ jobs:
     uses: viveksundar5/database_sample/.github/workflows/main.yml@main
     secrets:
       Workflow2_PAT_TOKEN_GITHUB: ${{ secrets.Workflow2_PAT_TOKEN_GITHUB }}
-      Sonar_host_url: ${{ secrets.SONAR_HOST_URL }}
-      Sonar_token: ${{ secrets.SONAR_TOKEN }}
+      SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       
