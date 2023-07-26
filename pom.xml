@@ -1,0 +1,43 @@
+<plugin>
+    <groupId>database.app</groupId> <artifactId>database-sonar-package</artifactId>
+    <version>1.1</version>
+
+ <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/viveksundar5/database_sample</url>
+    </repository>
+  </distributionManagement> 
+    
+    <executions>
+        <execution>
+            <id>create-Database</id>
+            <phase>package</phase> 
+            <goals>
+                <goal>run</goal>
+            </goals>
+            <configuration> 
+                <tasks>
+                    <path id="h2.classpath">
+                        <path refid="maven.compile.classpath"/> 
+                    </path>
+                    <echo
+                            message="######## Creating Database ########"/>
+                    <sql
+                            driver="org.h2.Driver"
+                            url="jdbc: h2:${basedir}/src/main/resources/WS02_DB" 
+                            userid="root" password="Svs@9551" autocommit="true"
+                            onerror="continue">
+                        <classpath>
+                            <path refid="h2.classpath"/>
+                        </classpath>
+                        <fileset file="${basedir}/src/main/resources/h2.sql"/>
+                    </sql>
+                    <echo
+                            message="######## END ########"/>
+                </tasks>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
