@@ -63,12 +63,12 @@
                             message="######## Creating Database ########"/>
                     <sql
                             driver="org.h2.Driver"
-                            url="jdbc: h2:${basedir}/src/main/resources/WS02_DB" 
+                            url="jdbc: h2:${basedir}/src/main/Database"
                             onerror="continue">
                         <classpath>
                             <path refid="h2.classpath"/>
                         </classpath>
-                        <fileset file="${basedir}/src/main/resources/h2.sql"/>
+                        <fileset file="${basedir}/src/main/Database/dbo"/>
                     </sql>
                     <echo
                             message="######## END ########"/>
