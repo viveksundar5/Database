@@ -29,41 +29,28 @@ jobs:
         with:
           java-version: 17
           distribution: 'temurin'
-          
+
+
       - name: Cache SonarQube packages
-        uses: actions/cache@v1
+        uses: actions/cache@v3
         with:
-         path: ~\sonar\cache
-         key: ${{ runner.os }}-sonar
-         restore-keys: ${{ runner.os }}-sonar
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
           
-      - name: Cache SonarQube scanner
-        id: cache-sonar-scanner
-        uses: actions/cache@v1
+      - name: Cache Maven packages
+        uses: actions/cache@v3
         with:
-          path: .\.sonar\scanner
-          key: ${{ runner.os }}-sonar-scanner
-          restore-keys: ${{ runner.os }}-sonar-scanner
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
           
-      - name: Install SonarQube scanner
-        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
-        #shell: powershell
-        run: |
-         New-Item -Path .\.sonar\scanner -ItemType Directory
-         dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
-        
-      - name: Run SonarQube Scan
-        run: |
-          echo "SONAR URL - > " ${{vars.SONAR_HOST_URL}}
-          #export SONAR_TOKEN=${{ secrets.SONAR_TOKEN }}
-          export SONAR_HOST_URL=${{vars.SONAR_HOST_URL}}
-          mvn install sonar:sonar \
-            -D sonar.projectKey=sql-server-test \
-            -D sonar.host.url=$SONAR_HOST_URL \
-            -D sonar.login=admin -D sonar.password=admin123  
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"sql-server-test" 
-           dotnet build
-      
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=test-maven-project
       - name: Push Artifact
         uses: actions/upload-artifact@v3.1.2
         with:
